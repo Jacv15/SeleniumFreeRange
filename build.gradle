@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'com.certificacion.SeleniumFreeRange'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // O la versión de Java que estés usando
+    }
+}
+
+    dependencies {
+    // *** AJUSTE AQUÍ: Usar versiones estables de JUnit 5
+    // https://mvnrepository.com/artifact/org.junit/junit-bom
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // Selenium y WebDriverManager
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation 'org.seleniumhq.selenium:selenium-java:4.34.0'
+    // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+    implementation 'io.github.bonigarcia:webdrivermanager:6.2.0'
+
+    // TestNG (si lo sigues usando, está bien, no interfiere con JUnit Platform)
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testImplementation 'org.testng:testng:7.11.0'
+
+    // Core de Cucumber
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    implementation 'io.cucumber:cucumber-java:7.26.0'
+
+    // JUnit Platform Suite (gestionada por el BOM si no especificas versión aquí)
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.26.0'
+    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite
+    testImplementation 'org.junit.platform:junit-platform-suite'
+
+    // Allure para reportes
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.24.0'
+    testImplementation 'io.qameta.allure:allure-junit-platform:2.24.0'
+
+    test {
+        // Configura Gradle para usar el JUnit Platform para ejecutar las pruebas
+        useJUnitPlatform()
+
+        // Permite pasar opciones de Cucumber desde la línea de comandos
+        systemProperty "cucumber.options", System.getProperty("cucumber.options")
+    }
+}
