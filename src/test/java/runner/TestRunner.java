@@ -9,7 +9,7 @@ import org.junit.platform.suite.api.Suite;
 @SelectDirectories("src/test/resources")
 @ConfigurationParameter(key = "cucumber.glue", value = "steps")
 @ConfigurationParameter(key = "cucumber.plugin", value = "pretty, html:target/cucumber-reports, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm")
-@IncludeTags({"test1"})
+@IncludeTags({"test1"}) // Specify the tag to include
 
 
 public class TestRunner {
